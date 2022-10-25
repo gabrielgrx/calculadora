@@ -1,5 +1,7 @@
 package calculadora;
 
+import menu.Menu;
+
 import java.util.Scanner;
 
 public class CalculadoraArea implements Calculadora{
@@ -16,6 +18,7 @@ public class CalculadoraArea implements Calculadora{
             System.out.println("Escolha uma das operaçãos abaixo:");
             System.out.println("1. Área do circulo");
             System.out.println("2. Área do retangulo");
+            System.out.println("9. Voltar ao menu principal");
             System.out.println("0. Desligar calculadora");
 
             Scanner scanner = new Scanner(System.in);
@@ -24,6 +27,7 @@ public class CalculadoraArea implements Calculadora{
             switch (opcaoCalcular) {
                 case 1 -> areaCirculo();
                 case 2 -> areaRetangulo();
+                case 9 -> Menu.escolha();
                 case 0 -> desligar();
                 default -> {
                     System.out.println("Você não selecionou nenhuma das opções apresentadas. Selecione alguma das opções");

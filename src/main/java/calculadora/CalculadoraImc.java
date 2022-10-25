@@ -1,5 +1,7 @@
 package calculadora;
 
+import menu.Menu;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -84,14 +86,17 @@ public class CalculadoraImc implements Calculadora {
         System.out.println("---------------------------------------------------------------------");
         System.out.println("Você gostaria de calcular um novo IMC ou gostaria de desligar a calculadora?");
         System.out.println("1. Calcular novo IMC");
-        System.out.println("2. Desligar Calculadora");
+        System.out.println("9. Voltar ao menu principal");
+        System.out.println("0. Desligar Calculadora");
         Scanner scanner = new Scanner(System.in);
         int opcao = scanner.nextInt();
 
         if (opcao == 1) {
             calcular();
-        } else if (opcao == 2) {
+        } else if (opcao == 0) {
             desligar();
+        } else if (opcao == 9) {
+            Menu.escolha();
         } else {
             System.out.println("Digite alguma opção válida");
             calcularNovoImcOuDesligarCalculadora();
