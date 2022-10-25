@@ -3,10 +3,12 @@ package calculadora;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class CalculadoraImc implements Calculadora{
+public class CalculadoraImc implements Calculadora {
     private float peso;
     private float altura;
     private int genero;
+    private double imc;
+    private String condicao;
 
     public CalculadoraImc() {
         calcular();
@@ -18,7 +20,7 @@ public class CalculadoraImc implements Calculadora{
         System.out.println("#### CALCULADORA IMC ####");
         calcularImc();
         imcGenero();
-        System.out.println("Seu IMC é de " + calcularImc() + " e você está " + imcGenero());
+        System.out.printf("O seu IMC é de %.2f e você está %s %n",this.imc, this.condicao);
         calcularNovoImcOuDesligarCalculadora();
     }
 
@@ -27,7 +29,7 @@ public class CalculadoraImc implements Calculadora{
         System.out.println("## DESLIGANDO CALCULADORA ##");
     }
 
-    private float calcularImc() throws InputMismatchException, IllegalArgumentException, ArithmeticException {
+    private double calcularImc() throws InputMismatchException, IllegalArgumentException, ArithmeticException {
         System.out.println("Qual seu peso em kg?");
         Scanner peso = new Scanner(System.in);
         this.peso = peso.nextFloat();
@@ -35,8 +37,8 @@ public class CalculadoraImc implements Calculadora{
         Scanner altura = new Scanner(System.in);
         this.altura = altura.nextFloat();
 
-        float imc = this.peso / (this.altura * this.altura);
-        return imc;
+        this.imc = this.peso / (this.altura * this.altura);
+        return this.imc;
     }
 
 
@@ -47,33 +49,35 @@ public class CalculadoraImc implements Calculadora{
         Scanner genero = new Scanner(System.in);
         this.setGenero(genero.nextInt());
 
-        String condicao = null;
         if (this.genero == 1) {
-            if (calcularImc() < 19.1f) {
-                condicao = "abaixo do peso";
-            } else if (calcularImc() <= 25.8f) {
-                condicao = "no peso normal";
-            } else if (calcularImc() <= 27.3f) {
-                condicao = "marginalmente acima do peso";
-            } else if (calcularImc() <= 32.3) {
-                condicao = "acima do peso ideal";
+            if (this.imc < 19.1f) {
+                this.condicao = "abaixo do peso";
+            } else if (this.imc <= 25.8f) {
+                this.condicao = "no peso normal";
+            } else if (this.imc <= 27.3f) {
+                this.condicao = "marginalmente acima do peso";
+            } else if (this.imc <= 32.3) {
+                this.condicao = "acima do peso ideal";
             } else {
-                condicao = "obeso";
+                this.condicao = "obeso";
             }
         } else if (this.genero == 2) {
-            if (calcularImc() < 20.7f) {
-                condicao = "abaixo do peso";
-            } else if (calcularImc() <= 26.4f) {
-                condicao = "no peso normal";
-            } else if (calcularImc() <= 27.8f) {
-                condicao = "marginalmente acima do peso";
-            } else if (calcularImc() <= 31.1) {
-                condicao = "acima do peso ideal";
+            if (this.imc < 20.7f) {
+                this.condicao = "abaixo do peso";
+            } else if (this.imc <= 26.4f) {
+                this.condicao = "no peso normal";
+            } else if (this.imc <= 27.8f) {
+                this.condicao = "marginalmente acima do peso";
+            } else if (this.imc <= 31.1) {
+                this.condicao = "acima do peso ideal";
             } else {
-                condicao = "obeso";
+                this.condicao = "obeso";
             }
+        } else {
+            System.out.println("Você precisa escolher alguma das opções.");
+            imcGenero();
         }
-        return condicao;
+        return this.condicao;
     }
 
     private void calcularNovoImcOuDesligarCalculadora() {
@@ -116,5 +120,21 @@ public class CalculadoraImc implements Calculadora{
 
     public void setGenero(int genero) {
         this.genero = genero;
+    }
+
+    public double getImc() {
+        return imc;
+    }
+
+    public void setImc(double imc) {
+        this.imc = imc;
+    }
+
+    public String getCondicao() {
+        return condicao;
+    }
+
+    public void setCondicao(String condicao) {
+        this.condicao = condicao;
     }
 }
