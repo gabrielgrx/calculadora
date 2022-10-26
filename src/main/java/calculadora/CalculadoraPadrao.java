@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class CalculadoraPadrao implements Calculadora {
 
     private int opcao;
-    private boolean calculadoraLigada = true;
+    private boolean statusCalculadora = true;
 
     public CalculadoraPadrao() {
         calcular();
@@ -16,7 +16,7 @@ public class CalculadoraPadrao implements Calculadora {
     @Override
     public void calcular() {
 
-        while (this.calculadoraLigada) {
+        while (this.statusCalculadora) {
             System.out.println("#### CALCULADORA PADRÃO ####");
             System.out.println("Escolha uma das operaçãos aritiméticas abaixo:");
             System.out.println("1. Soma");
@@ -34,11 +34,12 @@ public class CalculadoraPadrao implements Calculadora {
                 case 2 -> subtracao();
                 case 3 -> divisao();
                 case 4 -> multiplicacao();
-                case 9 -> Menu.escolha();
-                case 0 -> desligar();
-                default -> {
-                    System.out.println("Você não selecionou nenhuma das opções apresentadas. Selecione alguma das opções");
+                case 9 -> {
+                    this.statusCalculadora = false;
+                    Menu.escolha();
                 }
+                case 0 -> desligar();
+                default -> System.out.println("Você não selecionou nenhuma das opções apresentadas. Selecione alguma das opções");
             }
         }
     }
@@ -46,7 +47,7 @@ public class CalculadoraPadrao implements Calculadora {
     @Override
     public void desligar() {
         System.out.println("## DESLIGANDO CALCULADORA ##");
-        this.calculadoraLigada = false;
+        this.statusCalculadora = false;
     }
 
     private static void soma() {
@@ -84,14 +85,5 @@ public class CalculadoraPadrao implements Calculadora {
         double num1 = scanner.nextDouble();
         double num2 = scanner.nextDouble();
         System.out.println("A multiplicação do número " + num1 + " pelo " + num2 + " é igual a: " + (num1 * num2));
-    }
-
-
-    public int getOpcao() {
-        return opcao;
-    }
-
-    public void setOpcao(int opcao) {
-        this.opcao = opcao;
     }
 }

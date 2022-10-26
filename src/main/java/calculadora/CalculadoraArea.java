@@ -4,16 +4,16 @@ import menu.Menu;
 
 import java.util.Scanner;
 
-public class CalculadoraArea implements Calculadora{
-    private boolean calculadoraLigada = true;
-    private float pi = 3.14f;
-
+public class CalculadoraArea implements Calculadora {
+    private boolean statusCalculadora = true;
+    private final float pi = 3.14f;
     public CalculadoraArea() {
         calcular();
     }
+
     @Override
     public void calcular() {
-        while (this.calculadoraLigada) {
+        while (this.statusCalculadora) {
             System.out.println("#### CALCULADORA Área ####");
             System.out.println("Escolha uma das operaçãos abaixo:");
             System.out.println("1. Área do circulo");
@@ -27,11 +27,12 @@ public class CalculadoraArea implements Calculadora{
             switch (opcaoCalcular) {
                 case 1 -> areaCirculo();
                 case 2 -> areaRetangulo();
-                case 9 -> Menu.escolha();
-                case 0 -> desligar();
-                default -> {
-                    System.out.println("Você não selecionou nenhuma das opções apresentadas. Selecione alguma das opções");
+                case 9 -> {
+                    Menu.escolha();
+                    this.statusCalculadora = false;
                 }
+                case 0 -> desligar();
+                default -> System.out.println("Você não selecionou nenhuma das opções apresentadas. Selecione alguma das opções");
             }
         }
     }
@@ -39,41 +40,25 @@ public class CalculadoraArea implements Calculadora{
     @Override
     public void desligar() {
         System.out.println("## DESLIGANDO CALCULADORA ##");
-        this.calculadoraLigada = false;
+        this.statusCalculadora = false;
     }
 
     private void areaCirculo() {
-        System.out.println("Digite o raio do circulo:");
+        System.out.println("Digite o raio do circulo em metros:");
         Scanner scanner = new Scanner(System.in);
         double raio = scanner.nextDouble();
         double area = (raio * raio) * this.pi;
-        System.out.println("A área do circulo é de : "+ area);
+        System.out.println("A área do circulo é de : " + area + "m");
     }
 
     private void areaRetangulo() {
-        System.out.println("Digite a base do retangulo:");
+        System.out.print("Digite a base do retangulo em metros:");
         Scanner scanner = new Scanner(System.in);
         double base = scanner.nextDouble();
-        System.out.println("Digite a altura do retangulo:");
+        System.out.print("Digite a altura do retangulo em metros:");
         Scanner scanner2 = new Scanner(System.in);
         double altura = scanner2.nextDouble();
         double area = base * altura;
-        System.out.println("A área do retangulo é de : "+ area);
-    }
-
-    public boolean isCalculadoraLigada() {
-        return calculadoraLigada;
-    }
-
-    public void setCalculadoraLigada(boolean calculadoraLigada) {
-        this.calculadoraLigada = calculadoraLigada;
-    }
-
-    public float getPi() {
-        return pi;
-    }
-
-    public void setPi(float pi) {
-        this.pi = pi;
+        System.out.print("A área do retangulo é de : " + area+"m");
     }
 }
