@@ -16,14 +16,36 @@ public class MenuTest {
     public SystemOutRule systemOutRule = new SystemOutRule().enableLog(); // permite ler
 
     @Test
-    public void deveVoltarAoMenuQuandoNaoEscolherOpcaoValidaEEscolherSoma() {
-        systemInMock.provideLines("9","a");
+    public void deveVoltarAoMenuQuandoNaoEscolherOpcaoValidaEDesligar() {
+        systemInMock.provideLines("9","a","0");
 
         Menu menu = new Menu();
         String saida = systemOutRule.getLog();
 
         assertTrue(saida.contains("Você deve escolher umas das opções válidas."));
         assertTrue(saida.contains("O argumento digitado é invalido. Você tem que escolher um número dentre as opções."));
+        assertTrue(saida.contains("0. Desligar calculadora"));
     }
 
+    @Test
+    public void deveSomarEDesligar() {
+        systemInMock.provideLines("1","1","2","2","0");
+
+        Menu menu = new Menu();
+        String saida = systemOutRule.getLog();
+
+        assertTrue(saida.contains("Soma"));
+        assertTrue(saida.contains("4.0"));
+        assertTrue(saida.contains("DESLIGANDO"));
+    }
+    @Test
+    public void deveSomarEVoltarAoMenuEDesligar() {
+        systemInMock.provideLines("1","1","2","2","9","0");
+
+        Menu menu = new Menu();
+        String saida = systemOutRule.getLog();
+
+        assertTrue(saida.contains("Soma"));
+        assertTrue(saida.contains("4.0"));
+    }
 }

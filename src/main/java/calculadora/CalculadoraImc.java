@@ -22,7 +22,7 @@ public class CalculadoraImc implements Calculadora {
         System.out.println("#### CALCULADORA IMC ####");
         calcularImc();
         imcGenero();
-        System.out.printf("O seu IMC é de %.2f e você está %s %n",this.imc, this.condicao);
+        System.out.printf("O seu IMC é de %.2f e você está %s",this.imc, this.condicao);
         calcularNovoImcOuDesligarCalculadora();
     }
 
@@ -49,7 +49,7 @@ public class CalculadoraImc implements Calculadora {
         System.out.println("1. Homem");
         System.out.println("2. Mulher");
         Scanner genero = new Scanner(System.in);
-        this.setGenero(genero.nextInt());
+        this.genero = genero.nextInt();
 
         if (this.genero == 1) {
             if (this.imc < 19.1f) {
@@ -101,45 +101,5 @@ public class CalculadoraImc implements Calculadora {
             System.out.println("Digite alguma opção válida");
             calcularNovoImcOuDesligarCalculadora();
         }
-    }
-
-    public float getPeso() {
-        return peso;
-    }
-
-    public void setPeso(float peso) {
-        this.peso = peso;
-    }
-
-    public float getAltura() {
-        return altura;
-    }
-
-    public void setAltura(float altura) {
-        this.altura = altura;
-    }
-
-    public int getGenero() {
-        return genero;
-    }
-
-    public void setGenero(int genero) {
-        this.genero = genero;
-    }
-
-    public double getImc() {
-        return imc;
-    }
-
-    public void setImc(double imc) {
-        this.imc = imc;
-    }
-
-    public String getCondicao() {
-        return condicao;
-    }
-
-    public void setCondicao(String condicao) {
-        this.condicao = condicao;
     }
 }
